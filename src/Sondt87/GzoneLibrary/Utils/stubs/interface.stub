@@ -1,0 +1,6 @@
+<?php
+
+interface {{folder}}_Interface {
+
+
+}

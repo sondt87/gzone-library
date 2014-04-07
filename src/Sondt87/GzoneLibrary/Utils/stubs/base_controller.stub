@@ -1,0 +1,9 @@
+<?php
+
+class {{folder}}_BaseController extends BaseController implements {{folder}}_Interface{
+
+    public function getIndex(){
+         return "get Index of '{{folder}}'";
+    }
+
+}
