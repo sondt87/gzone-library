@@ -18,6 +18,7 @@
         "psr-0": {
             "Sondt87\\GzoneLibrary": "src/"
         }
-    }
+    },
+    "version": "1.2"
 
 }
