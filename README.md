@@ -1,5 +1,9 @@
+
 gzone-library
 =============
+### library require
+`"sondt87/gzone-library": "dev-master"`
+
 ### Register Service provider on config/app.php: 
 `'Sondt87\GzoneLibrary\GzoneLibraryServiceProvider'`
 
