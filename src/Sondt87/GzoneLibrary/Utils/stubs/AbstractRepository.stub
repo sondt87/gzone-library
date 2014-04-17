@@ -1,0 +1,46 @@
+<?php
+
+namespace {{folder}};
+
+abstract class AbstractRepository implements IRepository{
+
+    /**
+    * extended of Eloquent class
+    */
+    private $model;
+
+    /**
+    * $model: extended of Eloquent class
+    */
+    public function __construct($model){
+        $this->setModel($model);
+    }
+
+    /**
+    * $model: extended of Eloquent class
+    */
+    public function setModel($model){
+        $this->model = $model;
+    }
+
+    public function getModel(){
+        return $this->model;
+    }
+
+    public function all(){
+        return $this->getModel()->all();
+    }
+
+    public function find($id){
+        return $this->getModel()->find($id);
+    }
+
+    public function create($input){
+        return $this->getModel()->create($input);
+    }
+
+    public function delete($id){
+        $model = $this->getModel()->find($id);
+        return $model->delete();
+    }
+}

@@ -1,0 +1,9 @@
+<?php
+
+namespace {{folder}}\{{name}};
+
+use {{folder}}\IRepository;
+
+interface {{name}}Repository extends IRepository{
+
+}

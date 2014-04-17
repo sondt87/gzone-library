@@ -1,0 +1,16 @@
+<?php
+
+namespace {{folder}}\{{name}};
+
+use {{folder}}\AbstractRepository;
+
+class Eloquent{{name}}Repository extends AbstractRepository implements {{name}}Repository{
+
+    public function __construct($model){
+        parent::__construct($model);
+    }
+
+    public function update($input){
+
+    }
+}

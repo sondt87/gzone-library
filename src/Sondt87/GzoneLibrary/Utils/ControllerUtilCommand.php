@@ -43,8 +43,7 @@ class ControllerUtilCommand extends Command {
 	public function fire()
 	{
         $name = $this->argument("name");
-        $this->line("Start create controller: ".$name);
-
+        $this->line("Created controller: '".$name."'");
         $this->createController($name);
 	}
 
@@ -57,7 +56,6 @@ class ControllerUtilCommand extends Command {
 	{
 		return array(
 			array('name', InputArgument::REQUIRED, 'name of controller.'),
-//			array('path', InputArgument::OPTIONAL, 'path to locate.'),
 		);
 	}
 
@@ -69,8 +67,6 @@ class ControllerUtilCommand extends Command {
 	protected function getOptions()
 	{
 		return array(
-//			array('name', null, InputOption::VALUE_REQUIRED, 'Name of controller', null),
-			array('path', null, InputOption::VALUE_REQUIRED, 'path to folder', null),
 		);
 	}
 
