@@ -6,7 +6,7 @@ gzone-library
 ### Register Service provider on config/app.php: 
 `'Sondt87\GzoneLibrary\GzoneLibraryServiceProvider'`
 
-How to use
+How to use 
 =============
 
 ### make controller
