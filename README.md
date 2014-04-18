@@ -1,7 +1,6 @@
-
 gzone-library
 =============
-### library require
+### install
 `"sondt87/gzone-library": "dev-master"`
 
 ### Register Service provider on config/app.php: 
@@ -43,3 +42,18 @@ How to use
                 |      
                 |__ AbstractRepository.php
                 |__ IRepository
+                
+### make repository
+`php artisan util:make_model [name] {table}`
+
+note: atomaticaly remove charactor "_".
+
+##### example
+`php artisan util:make_repository User_Profile`
+
+##### results
+    app
+     |__ models
+          |__ UserProfile.php
+                       |__ public $table = 'user_profile';
+                
