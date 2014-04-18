@@ -1,0 +1,19 @@
+<?php
+
+class {{name}} extends Eloquent {
+
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = '{{table}}';
+
+
+    /**
+     * use to Mass Assignment. prevent the MassAssignmentException
+     * @var array
+     */
+    public $fillable = array();
+
+}
