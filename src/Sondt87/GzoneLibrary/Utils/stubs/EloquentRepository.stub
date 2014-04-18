@@ -10,7 +10,7 @@ class Eloquent{{name}}Repository extends AbstractRepository implements {{name}}R
         parent::__construct($model);
     }
 
-    public function update($input){
+    public function update($id,$input){
 
     }
 }
