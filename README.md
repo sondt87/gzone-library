@@ -43,13 +43,13 @@ How to use
                 |__ AbstractRepository.php
                 |__ IRepository
                 
-### make repository
+### make model
 `php artisan util:make_model [name] {table}`
 
 note: atomaticaly remove charactor "_".
 
 ##### example
-`php artisan util:make_repository User_Profile`
+`php artisan util:make_model User_Profile`
 
 ##### results
     app
