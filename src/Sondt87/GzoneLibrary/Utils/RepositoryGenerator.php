@@ -10,24 +10,16 @@ namespace Sondt87\GzoneLibrary\Utils;
 
 use Illuminate\Filesystem\Filesystem;
 
-class RepositoryGenerator
+class RepositoryGenerator extends AbsGenerator
 {
-    private $name;
-    private $appPath;
-    private $files;
-
-    function __construct($appPath, Filesystem $files)
-    {
-        $this->files = $files;
-        $this->appPath = $appPath;
-    }
 
     public function gen($name, $folder)
     {
-        $this->name = ucfirst($name);
         $this->genBaseRepository($folder);
         $this->genRepository($folder, $name);
         $this->genEloquentRepository($folder, $name);
+
+        return $folder.'/'.$name;
     }
 
     private function genBaseRepository($folder)
@@ -50,10 +42,26 @@ class RepositoryGenerator
             $stub = str_replace("{{folder}}", $nameSpace, $stub);
             $this->writeFile($stub, $path);
         }
-
-
     }
 
+    public function genRepositoryFile($source,$dist, $replacements = array()){
+        if (!$this->files->exists($dist)) {
+            $stub = $this->files->get($source);
+
+            foreach($replacements as $key => $value){
+                $stub = str_replace($key, $value, $stub);
+            }
+
+            $this->writeFile($stub, $dist);
+        }
+    }
+
+    /**
+     * Gen interface repository of $name
+     * @param $folder
+     * @param $name
+     * @return string : namespace of interface.
+     */
     private function genRepository($folder, $name)
     {
         //gen Repository interface
@@ -67,8 +75,16 @@ class RepositoryGenerator
         $stub = str_replace("{{folder}}", $nameSpace, $stub);
         $stub = str_replace("{{name}}", $name, $stub);
         $this->writeFile($stub, $path);
+
+        return $folder.'/'.$name;
     }
 
+    /**
+     * Gen class repository of $name
+     * @param $folder
+     * @param $name
+     * @return string : namespace of class.
+     */
     private function genEloquentRepository($folder, $name)
     {
         $path = $this->appPath . '/' . $folder . '/' . $name;
@@ -82,27 +98,8 @@ class RepositoryGenerator
         $stub = str_replace("{{name}}", $name, $stub);
         $this->writeFile($stub, $path);
 
-    }
+        return $folder.'/'.$name;
 
-    protected function writeFile($stub, $path)
-    {
-        if (!$this->files->exists($path)) {
-            return $this->files->put($path, $stub);
-        }
-    }
-
-    /**
-     * Create the directory for the controller.
-     *
-     * @param  string $controller
-     * @param  string $path
-     * @return void
-     */
-    protected function makeDirectory($path)
-    {
-        if (!$this->files->isDirectory($path)) {
-            $this->files->makeDirectory($path, 0777, true);
-        }
     }
 
 } 

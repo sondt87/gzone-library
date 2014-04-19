@@ -72,10 +72,22 @@ class ControllerUtilCommand extends Command {
 
     private function createController($name)
     {
-        $path = $this->app['path'].'/controllers';
+        $path = $this->app['path'];
+        $fileSystem = $this->app['files'];
 
-        $generator = new ControllerGenerator($name,$this->app['files']);
-        $generator->gen($path);
+        //gen interface
+        $generator = new InterfaceControllerGenerator($path,$fileSystem);
+        $generator->gen($name);
+
+        //base controller
+        $generator = new BaseControllerGenerator($path,$fileSystem);
+        $generator->gen($name);
+        //controller type
+        $generator = new ControllerGenerator($path,$fileSystem);
+
+        $generator->gen($name,'API');
+        $generator->gen($name,'Frontend');
+        $generator->gen($name,'Backend');
     }
 
 }

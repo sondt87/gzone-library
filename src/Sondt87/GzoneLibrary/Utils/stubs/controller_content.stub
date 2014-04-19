@@ -1,0 +1,77 @@
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $list{{folder}} = parent::index();
+        return View::make($this->folder.".all",array('list{{folder}}'=>$list{{folder}}));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return parent::create();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        return parent::store();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $obj = parent::show($id);
+        return View::make($this->folder.".show",array('obj'=>$obj));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $obj = $this->repo->find($id);
+        return View::make($this->folder.".edit",array('obj'=>$obj));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        return parent::update($id);
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        return parent::destroy($id);
+    }

@@ -1,6 +1,9 @@
 <?php
 
+{{use_repository}}
+
 class {{folder}}_{{type}}Controller extends {{folder}}_BaseController{
 
+    {{content}}
 
 }

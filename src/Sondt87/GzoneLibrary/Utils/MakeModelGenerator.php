@@ -8,26 +8,28 @@
 
 namespace Sondt87\GzoneLibrary\Utils;
 
-use Illuminate\Filesystem\Filesystem;
-
-class MakeModelGenerator
+class MakeModelGenerator extends AbsGenerator
 {
-
-    private $appPath;
-    private $files;
-
-    function __construct($appPath, Filesystem $files)
-    {
-        $this->files = $files;
-        $this->appPath = $appPath;
-    }
 
     public function gen($name, $table)
     {
-        if(!isset($table) || $table == '')
+        list($path, $stub) = $this->genBaseFile($name, $table);
+
+        $this->writeFile($stub, $path);
+    }
+
+
+    /**
+     * @param $name
+     * @param $table
+     * @return array
+     */
+    public function genBaseFile($name, $table)
+    {
+        if (!isset($table) || $table == '')
             $table = strtolower($name);
 
-        $name = str_replace('_','',$name);
+        $name = str_replace('_', '', $name);
 
         //gen Repository interface
         $path = $this->appPath . '/models/' . $name . '.php';
@@ -36,30 +38,8 @@ class MakeModelGenerator
 
         $stub = str_replace("{{name}}", $name, $stub);
         $stub = str_replace("{{table}}", $table, $stub);
-
-        $this->writeFile($stub, $path);
+        return array($path, $stub);
     }
 
-
-    protected function writeFile($stub, $path)
-    {
-        if (!$this->files->exists($path)) {
-            return $this->files->put($path, $stub);
-        }
-    }
-
-    /**
-     * Create the directory for the controller.
-     *
-     * @param  string $controller
-     * @param  string $path
-     * @return void
-     */
-    protected function makeDirectory($path)
-    {
-        if (!$this->files->isDirectory($path)) {
-            $this->files->makeDirectory($path, 0777, true);
-        }
-    }
 
 } 
