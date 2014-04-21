@@ -16,10 +16,10 @@ class RepositoryGenerator extends AbsGenerator
     public function gen($name, $folder)
     {
         $this->genBaseRepository($folder);
-        $this->genRepository($folder, $name);
+        $interfaceUsage = $this->genRepository($folder, $name);
         $this->genEloquentRepository($folder, $name);
 
-        return $folder.'/'.$name;
+        return $interfaceUsage;
     }
 
     private function genBaseRepository($folder)
@@ -76,7 +76,7 @@ class RepositoryGenerator extends AbsGenerator
         $stub = str_replace("{{name}}", $name, $stub);
         $this->writeFile($stub, $path);
 
-        return $folder.'/'.$name;
+        return $folder.'/'.$name."/".$name."Repository";
     }
 
     /**

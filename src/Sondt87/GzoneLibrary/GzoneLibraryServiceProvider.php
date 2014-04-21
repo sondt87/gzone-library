@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Sondt87\GzoneLibrary\Utils\ControllerUtilCommand;
+use Sondt87\GzoneLibrary\Utils\MakeAllCommand;
 use Sondt87\GzoneLibrary\Utils\MakeModelCommand;
 use Sondt87\GzoneLibrary\Utils\RepositoryCommand;
 
@@ -44,6 +45,14 @@ class GzoneLibraryServiceProvider extends ServiceProvider {
         });
 
         $this->commands("com.libs.command.utils.model.make");
+
+        //util:make_all
+        $this->app->bindShared("com.libs.command.utils.all.make", function($app){
+
+            return new MakeAllCommand($app);
+        });
+
+        $this->commands("com.libs.command.utils.all.make");
     }
 
     /**

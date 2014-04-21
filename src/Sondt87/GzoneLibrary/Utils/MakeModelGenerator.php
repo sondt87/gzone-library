@@ -11,7 +11,7 @@ namespace Sondt87\GzoneLibrary\Utils;
 class MakeModelGenerator extends AbsGenerator
 {
 
-    public function gen($name, $table)
+    public function gen($name, $table = '')
     {
         list($path, $stub) = $this->genBaseFile($name, $table);
 
