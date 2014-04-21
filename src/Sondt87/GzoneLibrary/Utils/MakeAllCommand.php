@@ -105,8 +105,8 @@ class MakeAllCommand extends Command{
         //controller type
         $generator = new ControllerGenerator($path,$fileSystem);
 
-        $generator->gen($name,'API');
-        $generator->gen($name,'Frontend');
-        $generator->gen($name,'Backend');
+        $generator->gen($name,'API', true);
+        $generator->gen($name,'Frontend', true);
+        $generator->gen($name,'Backend', true);
     }
 }
