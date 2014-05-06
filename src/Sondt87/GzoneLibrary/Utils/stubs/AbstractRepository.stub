@@ -43,4 +43,15 @@ abstract class AbstractRepository implements IRepository{
         $model = $this->getModel()->find($id);
         return $model->delete();
     }
+
+    /**
+    * return null if $id is not existed, updated object if saved
+    */
+    public function update($id,$input){
+        $obj = $this->find($id);
+        if($obj == null) return null;
+        $obj->fill($input);
+        $obj->save();
+        return $obj;
+    }
 }

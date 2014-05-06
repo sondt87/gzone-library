@@ -4,13 +4,13 @@ namespace {{folder}}\{{name}};
 
 use {{folder}}\AbstractRepository;
 
+/**
+* bind('{{folder}}\\{{name}}\\{{name}}Repository','{{folder}}\\{{name}}\\Eloquent{{name}}Repository');
+*/
 class Eloquent{{name}}Repository extends AbstractRepository implements {{name}}Repository{
 
-    public function __construct($model){
-        parent::__construct($model);
+    public function __construct(){
+        parent::__construct(new \{{name}}());
     }
 
-    public function update($id,$input){
-
-    }
 }

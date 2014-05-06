@@ -18,7 +18,7 @@ class ControllerUtilCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Create controller in a folder with interface, abs, cms, api of controller';
+	protected $description = 'Create controller in a folder with interface, abs, cms, api of controller, \n command: util:make_controller ModelName';
 
 
     protected $app;

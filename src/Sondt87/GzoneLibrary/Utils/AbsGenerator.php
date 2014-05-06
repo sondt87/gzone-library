@@ -75,4 +75,6 @@ abstract class AbsGenerator {
             return $this->files->put($path, $stub);
         }
     }
+
+
 } 

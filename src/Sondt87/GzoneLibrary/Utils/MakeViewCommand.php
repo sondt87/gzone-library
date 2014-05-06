@@ -2,31 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: mountain
- * Date: 4/18/14
- * Time: 4:49 PM
+ * Date: 5/6/14
+ * Time: 10:42 AM
  */
 
 namespace Sondt87\GzoneLibrary\Utils;
-
 
 use Illuminate\Console\Command;
 use Sondt87\GzoneLibrary\Utils\View\ViewGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 
-class MakeAllCommand extends Command{
+
+class MakeViewCommand extends Command{
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'util:make_all';
+    protected $name = 'util:make_views';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'util:make_all ModelName Path/To/RepoFolder generated automatically model, repository, controllers, views';
+    protected $description = 'util:make_views view_name => views/view_name/[all,create,edit,show].blade.php';
 
 
     protected $app;
@@ -51,9 +51,9 @@ class MakeAllCommand extends Command{
     public function fire()
     {
         $name = $this->argument("name");
-        $folder = $this->argument("folder");
+
         $this->line("Created successfully");
-        $this->createController($name,$folder);
+        $this->create($name);
     }
 
     /**
@@ -65,7 +65,7 @@ class MakeAllCommand extends Command{
     {
         return array(
             array('name', InputArgument::REQUIRED, 'name of model.'),
-            array('folder', InputArgument::REQUIRED, 'path to store repository'),
+
         );
     }
 
@@ -80,38 +80,13 @@ class MakeAllCommand extends Command{
         );
     }
 
-    private function createController($name,$folder)
+    private function create($name)
     {
         $path = $this->app['path'];
         $fileSystem = $this->app['files'];
-
-        $generator = new MakeModelGenerator($path,$fileSystem);
-        $generator->gen($name);
-
-        $generator = new RepositoryGenerator($path,$fileSystem);
-        $repoUsage = $generator->gen($name, $folder);
-        $repoUsage = str_replace("/","\\",$repoUsage);
-        $repoUsage = "use ".$repoUsage. ";";
-
-        //gen controller
-
-        //gen interface
-        $generator = new InterfaceControllerGenerator($path,$fileSystem);
-        $generator->gen($name);
-
-        //base controller
-        $generator = new BaseControllerGenerator($path,$fileSystem);
-        $generator->gen($name,true,$repoUsage);
-
-        //controller type
-        $generator = new ControllerGenerator($path,$fileSystem);
-
-        $generator->gen($name,'API', true);
-        $generator->gen($name,'Frontend', true);
-        $generator->gen($name,'Backend', true);
-
         //gen views
         $generator = new ViewGenerator($path,$fileSystem);
         $generator->gen($name);
     }
-}
+
+} 
