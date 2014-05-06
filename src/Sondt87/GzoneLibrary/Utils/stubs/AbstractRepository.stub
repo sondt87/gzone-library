@@ -27,12 +27,24 @@ abstract class AbstractRepository implements IRepository{
         return $this->model;
     }
 
-    public function all(){
-        return $this->getModel()->all();
+    /**
+     * @param int $itemPerPage = 10 as default
+     * @param array $columns = array('*')
+     * @return Paginator if $itemPerPage > 0 else return all rows of table as Collection
+     */
+    public function all($itemPerPage = 10, $columns = array('*')){
+        if($itemPerPage > 0) return $this->getModel()->paginate($itemPerPage, $columns);
+        else return $this->getModel()->all($columns);
     }
 
-    public function find($id){
-        return $this->getModel()->find($id);
+
+    /**
+     * @param int $id
+     * @param array $columns = array('*')
+     * @return Eloquent object
+     */
+    public function find($id, $columns = array('*')){
+        return $this->getModel()->find($id, $columns);
     }
 
     public function create($input){

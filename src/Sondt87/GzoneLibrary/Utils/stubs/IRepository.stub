@@ -3,10 +3,9 @@
 namespace {{folder}};
 
 interface IRepository {
+    public function all($itemPerPage = 10, $columns = array('*'));
 
-    public function all();
-
-    public function find($id);
+    public function find($id, $columns = array('*'));
 
     public function create($input);
 
