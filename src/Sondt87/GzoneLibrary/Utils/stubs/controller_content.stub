@@ -26,7 +26,15 @@
      */
     public function store()
     {
-        return parent::store();
+        $params = Input::all();
+
+        $validator = new {{name}}Validator();
+        if ($result = $validator->validate($params)) {
+            return Redirect::back()->withErrors($result)->withInput($params);
+        };
+
+        $obj = parent::store();
+        return Redirect::action('{{name}}_{{type}}Controller@index')->with('message',"Create successfully ". $obj->name);
     }
 
     /**
@@ -61,7 +69,13 @@
      */
     public function update($id)
     {
-        return parent::update($id);
+        $params = Input::all();
+        $validator = new {{name}}Validator();
+        if ($result = $validator->validate($params)) {
+            return Redirect::action('{{name}}_{{type}}Controller@edit', array($id))->withErrors($result);
+        };
+        $obj = parent::update($id);
+        return Redirect::action('{{name}}_{{type}}Controller@show', array($id))->with('message',$obj->name.' is updated successfully');
 
     }
 
@@ -73,5 +87,6 @@
      */
     public function destroy($id)
     {
-        return parent::destroy($id);
+        parent::destroy($id);
+        return Redirect::action('{{name}}_{{type}}Controller@index')->with('message','{{name}} is deleted successfully');
     }

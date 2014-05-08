@@ -20,7 +20,7 @@ class ControllerGenerator extends AbsControllerGenerator{
      * @param $usageRepository: use ProjectName\Repo\NameOfRepository
      * @return void
      */
-    public function gen($name, $type, $hasContent = false, $usageRepository = ''){
+    public function gen($name, $type, $hasContent = false,$folder = '', $usageRepository = ''){
         //make folder
         $path = $this->appPath."/".$name;
         $this->makeDirectory($path);
@@ -31,12 +31,16 @@ class ControllerGenerator extends AbsControllerGenerator{
 
         if($hasContent){
             $contenStub = $this->getContentStub($name,'controller');
+            $contenStub = str_replace("{{name}}",$name, $contenStub);
+            $contenStub = str_replace("{{type}}",$type, $contenStub);
+
             $stub = str_replace("{{content}}",$contenStub, $stub);
+            $usageRepository .= 'use '.$folder.'\\Validator\\'.$name.'Validator;';
         }else{
             $stub = str_replace("{{content}}",'', $stub);
         }
+            $stub = str_replace("{{use_repository}}",$usageRepository, $stub);
 
-        $stub = str_replace("{{use_repository}}",$usageRepository, $stub);
 
         $this->writeFileToFolder($stub, $type."Controller.php", $path);
     }
