@@ -18,13 +18,15 @@ class ViewGenerator extends AbsGenerator{
      */
     public function gen($modelName, $filesName = array('all','create','edit','show'))
     {
-        $modelName = strtolower($modelName);
-        $directory = $this->appPath . "/views/" . $modelName;
+
+        $directory = $this->appPath . "/views/" . strtolower($modelName);
         $this->makeDirectory($directory);
 
         foreach($filesName as $fileName ){
+            $stub = $this->getStub('view_'.$fileName.'.stub');
+            $stub = str_replace('{{name}}',$modelName,$stub);
             $filePath = $directory . "/" . $fileName . ".blade.php";
-            $this->writeFile("",$filePath);
+            $this->writeFile($stub,$filePath);
         }
     }
 

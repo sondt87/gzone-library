@@ -1,0 +1,48 @@
+@extends('template')
+
+@section('content')
+
+@if($errors->has())
+<div class="callout callout-success fade in">
+
+    We encountered the following errors:
+
+    <ul>
+        @foreach($errors->all() as $message)
+
+        <li>{{ $message }}</li>
+
+        @endforeach
+    </ul>
+
+</div>
+@endif
+
+
+{{Form::model($obj)}}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h6 class="panel-title"><i class="icon-stack"></i> Edit : </h6>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Name :</label>
+                    {{ Form::text('name',null,array('class'=>'form-control','placeholder'=>'name' )) }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-actions text-right">
+            <input type="submit" value="Create" class="btn btn-primary">
+            <input type="reset" value="Reset" class="btn btn-warnings">
+            <a class="btn btn-danger" href="{{ URL::action('{{name}}_BackendController@index') }}">Cancel</a>
+        </div>
+    </div>
+</div>
+
+{{Form::close()}}
+@stop

@@ -25,10 +25,13 @@ abstract class AbsGenerator {
      * Get stub content from stub file.
      *
      * @param $name
-     * @return string
+     * @return string empty if file is not exist
      */
     public function getStub($name){
-        $stub = $this->files->get(__DIR__ . '/stubs/'.$name);
+
+        $path = __DIR__ . '/stubs/' . $name;
+        if(!$this->files->exists($path)) return "";
+        $stub = $this->files->get($path);
         return $stub;
     }
     /**

@@ -1,0 +1,17 @@
+<?php
+
+namespace {{folder}};
+
+abstract class AbsValidator {
+    public abstract function getRules();
+    public abstract function getMessages();
+    public abstract function getCustomAttributes();
+    public function validate($input){
+        $validator = \Validator::make($input,$this->getRules(),$this->getMessages(),$this->getCustomAttributes());
+        if($validator->fails()){
+            return $validator;
+        }
+
+        return null;
+    }
+}

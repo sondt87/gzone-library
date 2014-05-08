@@ -6,6 +6,7 @@ use Sondt87\GzoneLibrary\Utils\MakeAllCommand;
 use Sondt87\GzoneLibrary\Utils\MakeModelCommand;
 use Sondt87\GzoneLibrary\Utils\MakeViewCommand;
 use Sondt87\GzoneLibrary\Utils\RepositoryCommand;
+use Sondt87\GzoneLibrary\Utils\ValidatorCommand;
 
 class GzoneLibraryServiceProvider extends ServiceProvider {
 
@@ -61,6 +62,14 @@ class GzoneLibraryServiceProvider extends ServiceProvider {
         });
 
         $this->commands("com.libs.command.utils.all.make");
+
+        //util:make_validator
+        $this->app->bindShared("com.libs.command.utils.validator.make", function($app){
+
+            return new ValidatorCommand($app);
+        });
+
+        $this->commands("com.libs.command.utils.validator.make");
     }
 
     /**

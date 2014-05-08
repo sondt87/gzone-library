@@ -15,6 +15,7 @@ class RepositoryGenerator extends AbsGenerator
 
     public function gen($name, $folder)
     {
+        $folder .= '/Repo';
         $this->genBaseRepository($folder);
         $interfaceUsage = $this->genRepository($folder, $name);
         $this->genEloquentRepository($folder, $name);
@@ -24,7 +25,7 @@ class RepositoryGenerator extends AbsGenerator
 
     private function genBaseRepository($folder)
     {
-        $path = $this->appPath . '/' . $folder;
+        $path = $this->appPath . '/' . $folder ;
         $this->makeDirectory($path);
 
         //gen interface

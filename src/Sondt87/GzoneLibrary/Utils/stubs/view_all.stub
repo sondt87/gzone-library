@@ -1,0 +1,56 @@
+@extends('template')
+
+@section('content')
+
+@if(Session::has('message'))
+<div class="callout callout-success fade in">{{Session::get('message')}}</div>
+@endif
+
+<h1>{{name}}</h1>
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{ URL::action('{{name}}_BackendController@create') }}" class="btn btn-success"><i class="icon-plus-circle2"></i>Create new {{name}}</a>
+    </div>
+</div>
+
+<br/>
+<div id="advanced" class="tab-pane fade active in">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h6 class="panel-title"><i class="icon-table"></i> {{name}}</h6>
+        </div>
+        <div class="">
+            <table class="table">
+                @if($list{{name}})
+                <thead>
+                <tr>
+                    <th>Id</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <td colspan="1" >{{ $list{{name}}->links() }}</td>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach($list{{name}} as $value)
+                <tr>
+                    <td>{{ $value->id }}</td>
+                    <td>
+                        <a href="{{ URL::action('{{name}}_BackendController@show',$value->id) }}" class="btn btn-info icon-file6"></a>
+                        <a href="{{ URL::action('{{name}}_BackendController@edit',$value->id) }}" class="btn btn-warning icon-pencil3"></a>
+                        <a href="{{ URL::action('{{name}}_BackendController@destroy',$value->id) }}" data-method="delete" class="btn btn-danger icon-remove3"></a>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+                @else
+                <p>Do not have any events</p>
+                @endif
+            </table>
+
+        </div>
+    </div>
+</div>
+@stop

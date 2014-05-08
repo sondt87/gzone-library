@@ -10,6 +10,7 @@ namespace Sondt87\GzoneLibrary\Utils;
 
 
 use Illuminate\Console\Command;
+use Sondt87\GzoneLibrary\Utils\Validator\ValidatorGenerator;
 use Sondt87\GzoneLibrary\Utils\View\ViewGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -26,8 +27,7 @@ class MakeAllCommand extends Command{
      *
      * @var string
      */
-    protected $description = 'util:make_all ModelName Path/To/RepoFolder generated automatically model, repository, controllers, views';
-
+    protected $description = '{util:make_all ModelName folder} => [folder]/Repo, [folder]/Validator generated automatically model, repository, controllers, views';
 
     protected $app;
 
@@ -65,7 +65,7 @@ class MakeAllCommand extends Command{
     {
         return array(
             array('name', InputArgument::REQUIRED, 'name of model.'),
-            array('folder', InputArgument::REQUIRED, 'path to store repository'),
+            array('folder', InputArgument::REQUIRED, 'path to store repository, validator'),
         );
     }
 
@@ -113,5 +113,10 @@ class MakeAllCommand extends Command{
         //gen views
         $generator = new ViewGenerator($path,$fileSystem);
         $generator->gen($name);
+
+        //gen validator
+        $generator = new ValidatorGenerator($path,$fileSystem);
+        $generator->gen($name,$folder);
+
     }
 }

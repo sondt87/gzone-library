@@ -1,0 +1,23 @@
+<?php
+
+namespace {{folder}};
+
+class {{name}}Validator extends AbsValidator {
+    public function getRules()
+    {
+
+        return array(
+
+        );
+    }
+
+    public function getMessages()
+    {
+        return array();
+    }
+
+    public function getCustomAttributes()
+    {
+        return array();
+    }
+}
